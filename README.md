@@ -62,7 +62,7 @@ docker network create wordpress-network
 #Docker run mysql
 docker run -d \
 --name grupo01 \
---network wordpress_net \
+--network wordpress-network \
 -e MYSQL_ROOT_PASSWORD=peque \
 -e MYSQL_DATABASE=grupos \
 -e MYSQL_USER=grupo1 \
@@ -74,7 +74,7 @@ mysql:latest
 #Docker run wordpress 
 docker run -d \
 --name wp-grupo01 \
---network wordpress_net \
+--network wordpress-network \
 -e WORDPRESS_DB_HOST=grupo01 \
 -e WORDPRESS_DB_USER=grupo1 \
 -e WORDPRESS_DB_PASSWORD=peque \
