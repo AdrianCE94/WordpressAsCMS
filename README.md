@@ -85,6 +85,23 @@ docker run -d \
 -v wordpress_data:/var/www/html \
 wordpress:latest
 ```
+
+# Verificar que los contenedores están corriendo
+```bash
+docker ps
+```
+
+# Ver los logs de MySQL
+```bash
+docker logs db
+```
+
+# Ver los logs de WordPress
+```bash
+docker logs wordpress
+```
+
+
 Ahora nos dirigimos a nuestro navegador y escribimos localhost:8080 o nuestra IP y nos aparecera la pagina de instalacion de wordpress.
 
 ![wp1](image.png)
