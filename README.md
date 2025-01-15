@@ -44,7 +44,7 @@ Para instalar Docker compose
 apt install docker-compose
 ```
 
-```
+```bash
 # Verificar la instalación
 
 docker --version
@@ -54,40 +54,36 @@ docker compose version
 
 ## WordPress con Docker
 
+# 1. Primero crear la red
 ```bash
-#Crear red
-docker network create wordpress-network
+docker network create wp_network
 ```
+
+# 2. Iniciar MySQL
 ```bash
-#Docker run mysql
 docker run -d \
---name grupo01 \
---network wordpress-network \
--e MYSQL_ROOT_PASSWORD=peque \
--e MYSQL_DATABASE=grupos \
--e MYSQL_USER=grupo1 \
--e MYSQL_PASSWORD=peque \
+--name db \
+--network wp_network \
+-e MYSQL_ROOT_PASSWORD=wordpress \
+-e MYSQL_DATABASE=wordpress \
+-e MYSQL_USER=wordpress \
+-e MYSQL_PASSWORD=wordpress \
 -v mysql_data:/var/lib/mysql \
 mysql:latest
 ```
+
+# 3. Iniciar WordPress
 ```bash
-#Docker run wordpress 
 docker run -d \
---name wp-grupo01 \
---network wordpress-network \
--e WORDPRESS_DB_HOST=grupo01 \
--e WORDPRESS_DB_USER=grupo1 \
--e WORDPRESS_DB_PASSWORD=peque \
--e WORDPRESS_DB_NAME=grupos \
+--name wordpress \
+--network wp_network \
+-e WORDPRESS_DB_HOST=db \
+-e WORDPRESS_DB_USER=wordpress \
+-e WORDPRESS_DB_PASSWORD=wordpress \
+-e WORDPRESS_DB_NAME=wordpress \
 -p 8080:80 \
 -v wordpress_data:/var/www/html \
 wordpress:latest
-```
-```bash
-#Para ver los contenedores
-docker ps
-#Para ver las redes
-docker network ls
 ```
 Ahora nos dirigimos a nuestro navegador y escribimos localhost:8080 o nuestra IP y nos aparecera la pagina de instalacion de wordpress.
 
