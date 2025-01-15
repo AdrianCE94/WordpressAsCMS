@@ -85,4 +85,6 @@ Ahora nos dirigimos a nuestro navegador y escribimos localhost:8080 o nuestra IP
 
 # Docker Compose
 
+![wp4](image-3.png)
+
 ```bash
