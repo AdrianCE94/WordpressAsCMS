@@ -147,28 +147,37 @@ version: '3.8'
 
 services:
   db:
-    image: mysql:8.0
+    image: mysql:5.7    # Cambiado de mysql:8.0 a mysql:5.7 para mejor compatibilidad
     volumes:
       - db_data:/var/lib/mysql
     restart: always
     env_file:
       - .env
     networks:
-      - wp_network
+      - wordpress-network
 
   wordpress:
     depends_on:
       - db
     image: wordpress:latest
     ports:
-      - "8080:80"
+      - "8081:80"    # Cambiado de 8080 a 8081 para evitar conflictos con Apache
     restart: always
     volumes:
       - wordpress_data:/var/www/html
     env_file:
       - .env
     networks:
-      - wp_network
+      - wordpress-network
+
+volumes:
+  db_data:
+  wordpress_data:
+
+networks:
+  wordpress-network:
+    driver: bridge
+
 ```
 
 luego ejecutamos el siguiente comando
