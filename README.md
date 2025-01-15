@@ -30,6 +30,7 @@ forma rápida de instalar docker en ubuntu
 apt update
 apt install docker.io
 apt install docker-compose
+
 ```
 > [!NOTE]
 > Para instalar Docker de manera completa [pincha aqui](https://docs.docker.com/engine/install/ubuntu/)
@@ -38,6 +39,13 @@ Para instalar Docker compose
 
 ```bash
 apt install docker-compose
+```
+
+```
+# Verificar la instalación
+
+docker --version
+docker-compose --version
 ```
 
 ## WordPress con Docker
@@ -85,6 +93,79 @@ Ahora nos dirigimos a nuestro navegador y escribimos localhost:8080 o nuestra IP
 
 # Docker Compose
 
-![wp4](image-3.png)
 
 ```bash
+#Creamos el fichero .env
+touch .env
+```
+```bash
+MYSQL_ROOT_PASSWORD=peque
+MYSQL_DATABASE=grupos
+MYSQL_USER=grupo01
+MYSQL_PASSWORD=peque
+WORDPRESS_DB_HOST=db
+WORDPRESS_DB_USER=grupo01
+WORDPRESS_DB_PASSWORD=peque
+WORDPRESS_DB_NAME=grupos
+```
+```bash
+touch docker-compose.yml
+```
+```bash
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    env_file:
+      - .env
+    networks:
+      - wordpress-network
+
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:latest
+    ports:
+      - "8080:80"
+    restart: always
+    volumes:
+      - wordpress_data:/var/www/html
+    env_file:
+      - .env
+    networks:
+      - wordpress-network
+```
+
+luego ejecutamos el siguiente comando
+
+```bash
+docker-compose up -d
+```
+```bash
+#Para ver los contenedores
+docker ps
+#Para ver las redes
+docker network ls
+```
+Ahora nos dirigimos a nuestro navegador y escribimos localhost:8080 o nuestra IP y nos aparecera la pagina de instalacion de wordpress.
+
+
+![wp4](image-4.png)
+
+
+# Uso Rapido
+
+```bash
+git clone https://github.com/AdrianCE94/WordpressAsCMS
+```
+```bash
+cd WordpressAsCMS
+```
+```bash
+docker-compose up -d
+```
+
