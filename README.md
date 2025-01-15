@@ -157,7 +157,7 @@ Ahora nos dirigimos a nuestro navegador y escribimos localhost:8080 o nuestra IP
 ![wp4](image-4.png)
 
 
-# Uso Rapido
+# Automatización
 
 ```bash
 git clone https://github.com/AdrianCE94/WordpressAsCMS
