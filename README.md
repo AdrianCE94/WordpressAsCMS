@@ -1,3 +1,6 @@
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+![WordPress](https://img.shields.io/badge/WordPress-%23117AC9.svg?style=for-the-badge&logo=WordPress&logoColor=white)
+
 # Instalación de WordPress con Docker
 
 Este documento describe los requisitos y pasos para instalar WordPress usando Docker y Docker compose.
@@ -145,27 +148,37 @@ luego ejecutamos el siguiente comando
 ```bash
 docker-compose up -d
 ```
-```bash
-#Para ver los contenedores
-docker ps
-#Para ver las redes
-docker network ls
-```
+
 Ahora nos dirigimos a nuestro navegador y escribimos localhost:8080 o nuestra IP y nos aparecera la pagina de instalacion de wordpress.
 
 
 ![wp4](image-4.png)
 
+```bash
+#Para ver los contenedores
+docker ps
 
-# Automatización
+#Para ver las redes
+docker network ls
 
-```bash
-git clone https://github.com/AdrianCE94/WordpressAsCMS
+# Detener los contenedores
+docker-compose down
+
+# Detener los contenedores y eliminar los volúmenes
+docker-compose down -v
+
+# Eliminar todo (contenedores, redes, volúmenes)
+docker-compose down -v --remove-orphans
 ```
-```bash
-cd WordpressAsCMS
-```
-```bash
-docker-compose up -d
-```
+
+## Instalación Rápida (Método recomendado)
+las variables de entorno se encuentran en el archivo .env y puedes modificarlas según tus necesidades.
+
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/AdrianCE94/WordpressAsCMS
+   cd WordpressAsCMS
+   docker-compose up -d
+    ```
+2. Abre tu navegador y accede a `http://localhost:8080` para configurar WordPress.
 
