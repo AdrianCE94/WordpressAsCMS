@@ -57,6 +57,7 @@ docker compose version
 # 1. Primero crear la red
 ```bash
 docker network create wp_network
+docker network ls
 ```
 
 # 2. Iniciar MySQL
@@ -94,12 +95,9 @@ docker ps
 # Ver los logs de MySQL
 ```bash
 docker logs db
-```
-
-# Ver los logs de WordPress
-```bash
 docker logs wordpress
 ```
+
 
 
 Ahora nos dirigimos a nuestro navegador y escribimos localhost:8080 o nuestra IP y nos aparecera la pagina de instalacion de wordpress.
@@ -108,25 +106,39 @@ Ahora nos dirigimos a nuestro navegador y escribimos localhost:8080 o nuestra IP
 ![wp2](image-1.png)
 ![wp3](image-2.png)
 
+
+# Para borrar todo
+```bash
+docker stop wordpress db
+docker rm wordpress db
+docker network rm wp_network
+docker volume rm mysql_data wordpress_data
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+docker volume rm -f mysql_data wordpress_data
+```
+
+
 # Docker Compose
 
-
-```bash
 #Creamos el fichero .env
+```bash
 touch .env
+nano .env
 ```
 ```bash
-MYSQL_ROOT_PASSWORD=peque
-MYSQL_DATABASE=grupos
-MYSQL_USER=grupo01
-MYSQL_PASSWORD=peque
+MYSQL_ROOT_PASSWORD=wordpress
+MYSQL_DATABASE=wordpress
+MYSQL_USER=wordpress
+MYSQL_PASSWORD=wordpress
 WORDPRESS_DB_HOST=db
-WORDPRESS_DB_USER=grupo01
-WORDPRESS_DB_PASSWORD=peque
-WORDPRESS_DB_NAME=grupos
+WORDPRESS_DB_USER=wordpress
+WORDPRESS_DB_PASSWORD=wordpress
+WORDPRESS_DB_NAME=wordpress
 ```
 ```bash
 touch docker-compose.yml
+nano docker-compose.yml
 ```
 ```bash
 version: '3.8'
@@ -140,7 +152,7 @@ services:
     env_file:
       - .env
     networks:
-      - wordpress-network
+      - wp_network
 
   wordpress:
     depends_on:
@@ -154,7 +166,7 @@ services:
     env_file:
       - .env
     networks:
-      - wordpress-network
+      - wp_network
 ```
 
 luego ejecutamos el siguiente comando
