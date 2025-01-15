@@ -48,7 +48,8 @@ apt install docker-compose
 # Verificar la instalación
 
 docker --version
-docker-compose --version
+docker compose version
+
 ```
 
 ## WordPress con Docker
