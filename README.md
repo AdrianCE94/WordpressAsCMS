@@ -57,6 +57,8 @@ docker compose version
 # 1. Primero crear la red
 ```bash
 docker network create wp_network
+```
+```bash
 docker network ls
 ```
 
