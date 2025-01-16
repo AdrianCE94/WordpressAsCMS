@@ -36,16 +36,11 @@ apt install docker-compose
 
 ```
 > [!NOTE]
-> Para instalar Docker de manera completa [pincha aqui](https://docs.docker.com/engine/install/ubuntu/)
+> Para instalar Docker de manera oficial [pincha aqui](https://docs.docker.com/engine/install/ubuntu/)
 
-Para instalar Docker compose
-
-```bash
-apt install docker-compose
-```
-
-```bash
 # Verificar la instalación
+
+```bash
 
 docker --version
 docker compose version
@@ -104,9 +99,7 @@ docker logs wordpress
 
 Ahora nos dirigimos a nuestro navegador y escribimos localhost:8080 o nuestra IP y nos aparecera la pagina de instalacion de wordpress.
 
-![wp1](image.png)
-![wp2](image-1.png)
-![wp3](image-2.png)
+
 
 
 # Para borrar todo
@@ -123,7 +116,7 @@ docker volume rm -f mysql_data wordpress_data
 
 # Docker Compose
 
-#Creamos el fichero .env
+#Creamos el fichero .env (se pueden cambiar) y crear el fichero .yml por el puerto 81 para no tener conflictos con apache2
 ```bash
 touch .env
 nano .env
